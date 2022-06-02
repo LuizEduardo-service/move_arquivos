@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "move_arquivo"
+version = "0.1.0"
+description = "Codigo responsavel por verificar aquivos novos em uma determinada pasta e enviar para seu destino"
+authors = ["LuizEduardo-service <luizeduardo.service@outlook.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+PyMsgBox = "^1.0.9"
+schedule = "^1.1.0"
+win10toast = "^0.9"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+pip-autoremove = "^0.10.0"
+blue = "^0.9.0"
+prospector = "^1.7.7"
+pip-audit = "^2.3.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
