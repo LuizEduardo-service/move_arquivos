@@ -26,7 +26,7 @@ class TransferenciaArquivos:
         pass
 
 
-    def valida_dir(self, caminho):
+    def valida_dir(self, caminho) -> bool:
         if os.path.isdir(pathlib.Path(caminho)):
             return True
 
@@ -79,24 +79,38 @@ if __name__ == "__main__":
     print('     =================================================================')
     # ================= INICIO DO PROGRAMA ==============================='
     # insere caminho de arquivos
+    parametros: dict = {}
+    program = TransferenciaArquivos()
+    tempo_freq: int = 20
     try:
-        program = TransferenciaArquivos()
+        
         origem = input('Digite o diretório de origem: ').strip()
-        var = program.valida_dir(origem)
-        if not var:
+        var_origem = program.valida_dir(origem)
+        if not var_origem:
             sys.exit()
         destino = input('Digite o diretório de Destino: ').strip()
-        var = program.valida_dir(origem)
-        if not var:
+        var_destino = program.valida_dir(destino)
+        if not var_destino:
             sys.exit()
+        freq = int(input('Consultar a cada (segundo) padrão 20 segundos: '))
+
+        if freq > 0:
+            tempo_freq = freq
+        else:
+            print('Tempo padrão acionado 20 segundos!')
+            pass 
+
     except KeyboardInterrupt:
         print('O Programa foi finalizado')
         sys.exit()
+
+
     # lista todos os arquivos dentro da pasta
     list_file = lista_arquivos_inicial(caminho)
     # definição de rotina (frequencia que sera executado)
-    schedule.every(20).seconds.do(program.iniciar, origem, destino)
+    schedule.every(tempo_freq).seconds.do(program.iniciar, origem, destino)
     # loop de repetição de rotina
+
     while 1:
         try:
             schedule.run_pending()
